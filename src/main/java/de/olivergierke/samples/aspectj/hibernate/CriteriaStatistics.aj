@@ -8,7 +8,7 @@ import org.hibernate.loader.criteria.CriteriaLoader;
  */
 public privileged aspect CriteriaStatistics {
     
-    public static String PREFIX = "[CRITERIA] ";
+    public static final String PREFIX = "[CRITERIA] ";
 
     
     public String CriteriaLoader.getQueryIdentifier() { 
