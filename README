@@ -1,0 +1,16 @@
+Enabling Hibernate criteria statistics with AspectJ
+---------------------------------------------------
+
+Currently Hibernate statistics does not include information about
+criteria queries. According to this ticket [1] all it needs to make
+this work is add a method 
+
+protected String getQueryIdentifier() { 
+  return "[CRITERIA] " + getSQLString();
+}
+
+to CriteriaLoader class. As patching Hibernate itself would be rather
+tedious, this projects contains an AspectJ aspect to add the method
+via an inter-type declaration as well as a test to demonstrate it.
+
+[1] - http://opensource.atlassian.com/projects/hibernate/browse/HHH-3452
