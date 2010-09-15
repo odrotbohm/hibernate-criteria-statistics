@@ -7,9 +7,12 @@ import javax.persistence.Id;
 
 
 /**
+ * Sample entity to be persisted.
+ * 
  * @author Oliver Gierke
  */
 @Entity
+@SuppressWarnings("unused")
 public class User {
 
     @Id
@@ -23,9 +26,6 @@ public class User {
     }
 
 
-    /**
-     * @param lastname
-     */
     public User(String lastname) {
 
         this.lastname = lastname;

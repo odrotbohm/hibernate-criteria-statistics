@@ -17,22 +17,22 @@ import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 
 
 /**
+ * Integration test to see whether {@link CriteriaStatisticsAspect} aspect really
+ * enables statistics for criteria queries.
+ * 
  * @author Oliver Gierke
  */
 public class CriteriaStatisticsIntegrationTest {
 
     SessionFactory sessionFactory;
-    Properties hibernateProperties;
-
-    {
-        hibernateProperties = new Properties();
-        hibernateProperties.put("hibernate.dialect",
-                "org.hibernate.dialect.HSQLDialect");
-    }
 
 
     @Before
     public void setUp() throws Exception {
+
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.put("hibernate.dialect",
+                "org.hibernate.dialect.HSQLDialect");
 
         AnnotationSessionFactoryBean bean = new AnnotationSessionFactoryBean();
         bean.setDataSource(new EmbeddedDatabaseBuilder().setType(HSQL).build());
@@ -63,6 +63,6 @@ public class CriteriaStatisticsIntegrationTest {
         String[] queries = this.sessionFactory.getStatistics().getQueries();
 
         assertThat(queries.length, is(1));
-        assertTrue(queries[0].startsWith(CriteriaStatistics.PREFIX));
+        assertTrue(queries[0].startsWith(CriteriaStatisticsAspect.PREFIX));
     }
 }
